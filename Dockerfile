@@ -26,17 +26,9 @@ USER $EXERCISE_NAME
 WORKDIR /home/$EXERCISE_NAME
 
 # make hisat2 index at ~/dm6
+RUN ls -lh
 RUN wget https://genome-idx.s3.amazonaws.com/hisat/dm6.tar.gz
 RUN tar -xvzf dm6.tar.gz
-RUN cd dm6
-RUN ./make_dm6.sh
-RUN cd ..
 
 # Make RUN commands use `bash --login`:
 SHELL ["/bin/bash", "--login", "-c"]
-RUN echo \
-    "---------------------------------------------------------------------------\n\
-    After registration to the assignment, please clone your exercise repository\n\
-    exercise04$ git clone [GITHUB_ASSIGNMENT_REPO_URL]\n\
-    ---------------------------------------------------------------------------"\
-    > README
