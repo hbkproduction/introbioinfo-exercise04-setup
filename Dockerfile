@@ -25,17 +25,5 @@ RUN useradd --create-home --shell /bin/bash $EXERCISE_NAME
 USER $EXERCISE_NAME
 WORKDIR /home/$EXERCISE_NAME
 
-# make hisat2 index at ~/dm6
-RUN ls -lh
-RUN wget https://genome-idx.s3.amazonaws.com/hisat/dm6.tar.gz
-RUN tar -xvzf dm6.tar.gz
-RUN rm dm6.tar.gz
-RUN cd dm6
-RUN wget -O dm6.fa.gz ftp://hgdownload.cse.ucsc.edu/goldenPath/dm6/bigZips/dm6.fa.gz
-RUN gzip -cd dm6.fa.gz > genome.fa
-ARG HISAT2_BUILD_EXE=hisat2-build
-RUN rm dm6.fa.gz
-RUN ${HISAT2_BUILD_EXE} genome.fa genome
-RUN cd ..
 # Make RUN commands use `bash --login`:
 SHELL ["/bin/bash", "--login", "-c"]
